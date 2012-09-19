@@ -39,6 +39,7 @@ class GotoFolderCommand(sublime_plugin.ApplicationCommand):
 			return sys.executable
 
 	def sublime_command_line(self, args):
+		args.insert(0, self.get_sublime_path())
 		return subprocess.Popen(args)
 
 	def run(self):
