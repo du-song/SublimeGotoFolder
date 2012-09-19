@@ -1,0 +1,11 @@
+[
+    {
+        "caption": "Goto",
+        "mnemonic": "G",
+        "id": "goto",
+        "children":
+        [
+            { "command": "goto_folder", "caption": "Goto Folder" }
+        ]
+    }
+]
