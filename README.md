@@ -17,19 +17,24 @@ create GotoFolder.sublime-settings with content like this:
 ```
 {
     "root_folders": [{
-    	"folder": "/Users/freewizard/Projects/as3", //required
-    	"extra": ["/Users/freewizard/Projects/as3/common"], //optional
-    	"alias": "AS3" //optional
+        //required, all sub-folders inside will be included, except .*
+        "folder": "/Users/freewizard/Projects/as3",
+
+        //optional, will be opened together with one of sub-folders
+        "extra": ["/Users/freewizard/Projects/as3/common"],
+
+        //optional, will be used in display panel, e.g. AS3:SubFolderName
+        "alias": "AS3" 
     },{
-    	"folder": "/Users/freewizard/Projects/cocoa",
-    	"extra": ["/Users/freewizard/Projects/cocoa/common"],
-    	"alias": "iOS"
+        "folder": "/Users/freewizard/Projects/cocoa",
+        "alias": "iOS"
     },{
-    	"folder": "/Users/freewizard/Projects/android",
-    	"extra": ["/Users/freewizard/Projects/android/common"],
-    	"alias": "Android"
-    },
-    "cache": true //set cache to true to save scan time
+        "folder": "/Users/freewizard/Projects/android",
+        "alias": "Android"
+    }],
+
+    //optional, set to true to save scan time, but requires ST re-launch when folder list change
+    "cache": false 
 }
 ```
 

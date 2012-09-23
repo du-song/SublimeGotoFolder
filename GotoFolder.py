@@ -60,15 +60,18 @@ class GotoFolderCommand(sublime_plugin.ApplicationCommand):
 					root['alias'] = ""
 				else:
 					root['alias'] += ":"
-				for f in os.listdir(root['folder']):
-					if f.startswith(".") or os.path.isfile(root['folder']+"/"+f):
-						continue
-					self.folder_list.append([root['alias']+f])
-					a = [root['folder']+"/"+f]
-					if root.has_key('extra'):
-						a += root['extra']
-					self.folder_info.append(a)
-					folder_count+=1
+				try:
+					for f in os.listdir(root['folder']):
+						if f.startswith(".") or os.path.isfile(root['folder']+"/"+f):
+							continue
+						self.folder_list.append([root['alias']+f])
+						a = [root['folder']+"/"+f]
+						if root.has_key('extra'):
+							a += root['extra']
+						self.folder_info.append(a)
+						folder_count+=1
+				except Exception, e:
+					print e, ". Check GotoFolder.sublime-settings file"
 			#print "GotoFolder Plugin:", folder_count, "folders added to the list"
 		sublime.active_window().show_quick_panel(self.folder_list, self.on_select)
 
