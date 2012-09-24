@@ -62,7 +62,7 @@ class GotoFolderCommand(sublime_plugin.ApplicationCommand):
 					root['alias'] += ":"
 				try:
 					for f in os.listdir(root['folder']):
-						if f.startswith(".") or os.path.isfile(root['folder']+"/"+f):
+						if f.startswith(".") or (os.path.isfile(root['folder']+"/"+f) and not f.endswith(".sublime-project")):
 							continue
 						self.folder_list.append([root['alias']+f])
 						a = [root['folder']+"/"+f]
