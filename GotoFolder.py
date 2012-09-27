@@ -1,5 +1,5 @@
 import sublime, sublime_plugin
-import subprocess, os
+import subprocess, os, sys
 
 class GotoFolderCommand(sublime_plugin.ApplicationCommand):
 	def __init__(self):
