@@ -32,7 +32,7 @@ class GotoFolderCommand(sublime_plugin.ApplicationCommand):
 				CFRelease.argtypes = [c_void_p]
 				CFRelease(path)
 				CFRelease(url)
-			return self.app_path_mac + '/Contents/SharedSupport/bin/subl'
+			return self.app_path_mac.decode() + '/Contents/SharedSupport/bin/subl'
 		elif sublime.platform() == 'linux':
 			return open('/proc/self/cmdline').read().split(chr(0))[0]
 		else:
@@ -56,7 +56,7 @@ class GotoFolderCommand(sublime_plugin.ApplicationCommand):
 			self.folder_info = [];
 			folder_count = 0;
 			for root in root_folders:
-				if not root.has_key('alias'):
+				if 'alias' not in root:
 					root['alias'] = ""
 				else:
 					root['alias'] += ":"
@@ -66,12 +66,12 @@ class GotoFolderCommand(sublime_plugin.ApplicationCommand):
 							continue
 						self.folder_list.append([root['alias']+f])
 						a = [root['folder']+"/"+f]
-						if root.has_key('extra'):
+						if 'extra' in root:
 							a += root['extra']
 						self.folder_info.append(a)
 						folder_count+=1
-				except Exception, e:
-					print e, ". Check GotoFolder.sublime-settings file"
+				except Exception as e:
+					print(e, ". Check GotoFolder.sublime-settings file")
 			#print "GotoFolder Plugin:", folder_count, "folders added to the list"
 		sublime.active_window().show_quick_panel(self.folder_list, self.on_select)
 
@@ -86,7 +86,7 @@ class GotoFolderCommand(sublime_plugin.ApplicationCommand):
 		self.sublime_command_line(args)
 
 	def find_and_focus_folder(self, folder):
-		for w in sublime.windows(): 
+		for w in sublime.windows():
 			for f in w.folders():
 				if f == folder:
 					sublime.focus_window(w)
