@@ -34,7 +34,8 @@ class GotoFolderCommand(sublime_plugin.ApplicationCommand):
 				CFRelease(url)
 			return self.app_path_mac.decode() + '/Contents/SharedSupport/bin/subl'
 		elif sublime.platform() == 'linux':
-			return open('/proc/self/cmdline').read().split(chr(0))[0]
+			# this might work across OSs but I can't test it..
+			return sublime.executable_path()
 		else:
 			return sys.executable
 
